@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useQuery, gql } from "@apollo/client";
 import { useParams } from "react-router-dom";
+import Spin from "./Spin";
 
 const GET_LINK = gql`
   query GetLink($slug: String!) {
@@ -13,7 +14,6 @@ const GET_LINK = gql`
 
 export default function OpenLink() {
   const { slug } = useParams();
-  console.log(slug);
   const { loading, error, data } = useQuery(GET_LINK, { variables: { slug } });
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function OpenLink() {
 
   let content = <div>Not a valid link!</div>;
   if (loading) {
-    content = <div>Loading...</div>;
+    content = <Spin />;
   }
 
   if (data?.link?.target) {

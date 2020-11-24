@@ -12,10 +12,15 @@ const CREATE_LINK = gql`
 
 export default function CreateLink() {
   const [createLink, { data }] = useMutation(CREATE_LINK);
+  const submit = (e) => {
+    e.preventDefault();
+
+    console.log("submitting");
+  };
   return (
     <div className="bg-blue-800 p-8">
       <div className="container mx-auto">
-        <form className="flex justify-center">
+        <form className="flex justify-center" onSubmit={submit}>
           <input className="p-2 rounded" name="url" />
           <input
             className="bg-blue-400 ml-4 px-4 text-white rounded"
